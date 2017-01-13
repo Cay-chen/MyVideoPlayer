@@ -25,7 +25,7 @@ public class VideoPlayActivity extends AppCompatActivity implements Runnable{
     private VideoView mVideoView;
     private MediaController mMediaController;
     private MyMediaController myMediaController;
-    private static final String TAG = "VideoPlayActivity";
+    private static final String TAG = "Cay";
 
     private static final int TIME = 0;
     private static final int BATTERY = 1;
@@ -35,7 +35,6 @@ public class VideoPlayActivity extends AppCompatActivity implements Runnable{
             switch (msg.what) {
                 case TIME:
                     myMediaController.setTime(msg.obj.toString());
-                    myMediaController.setFileName("天启");
 
                     break;
                 case BATTERY:
@@ -79,6 +78,7 @@ public class VideoPlayActivity extends AppCompatActivity implements Runnable{
             mMediaController.show(5000);
             mVideoView.requestFocus();
             registerBoradcastReceiver();
+            myMediaController.setFileName("天启");
             new Thread(this).start();
 
         }
@@ -92,6 +92,7 @@ public class VideoPlayActivity extends AppCompatActivity implements Runnable{
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
+        Log.i(TAG, "onConfigurationChanged: ");
 
         if (mVideoView != null) {
             mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, 0);
@@ -128,7 +129,7 @@ public class VideoPlayActivity extends AppCompatActivity implements Runnable{
     };
 
     public void registerBoradcastReceiver() {
-        //注册电量广播监听
+        //注册电量广播监听电池电量改变
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         registerReceiver(batteryBroadcastReceiver, intentFilter);
 
@@ -136,7 +137,6 @@ public class VideoPlayActivity extends AppCompatActivity implements Runnable{
 
     @Override
     public void run() {
-        // TODO Auto-generated method stub
         while (true) {
             //读取线程
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");

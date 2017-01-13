@@ -1,6 +1,5 @@
 package com.code.first.myvideoplayer;
 
-import android.graphics.Path;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
